@@ -46,6 +46,12 @@ package com.ldd.uqam.minicontrapt
 			trace("sent : " + message);
 		}
 		
+		public function SendObject(obj:Object):void
+		{
+			_socket.send(obj);
+			trace("sent obj : " + obj);
+		}
+		
 		/**
 		 * Closes the current connection
 		 */
@@ -86,7 +92,7 @@ package com.ldd.uqam.minicontrapt
 		{
 			trace("onData Called");
 			_receivedQueue.write(e.data);
-			dispatchEvent(new CommunicationEvent(MSG_RECV, e.data, new Message(), false, false));
+			dispatchEvent(new CommunicationEvent(MSG_RECV, e.data, new Message("ij","test",20), false, false));
 			trace(e.data);
 		}
 		

@@ -7,9 +7,16 @@ package com.ldd.uqam.minicontrapt
 	public class Message 
 	{
 		
-		public function Message() 
+		public var data:String;
+		public var name:String;
+		public var age:int;
+		
+		
+		public function Message(data:String, name:String,age:int) 
 		{
-			
+			this.data = data;
+			this.name = name;
+			this.age = age;
 		}
 		
 	}
