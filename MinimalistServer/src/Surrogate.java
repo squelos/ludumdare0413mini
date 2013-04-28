@@ -7,12 +7,9 @@ import java.net.Socket;
 
 
 public class Surrogate implements Runnable{
-	
-	
 	private BufferedReader readerIn;
 	private PrintStream printOut;
 	private Socket _socket;
-	
 	
 	public Surrogate(Socket socket)
 	{
@@ -28,22 +25,22 @@ public class Surrogate implements Runnable{
 					_socket.getInputStream()));
 			printOut = new PrintStream(_socket.getOutputStream());
 			PrintWriter output = new PrintWriter(_socket.getOutputStream(),true);
-			
-			printOut.println("Enter EXIT to exit.\r");
-			out("Enter EXIT to exit.\r");
+		
 			boolean done = false;
-			while (!done) {
+			while (true) {
 				String str = readerIn.readLine();
-				str = str.trim();
-				
+				//str = str.trim() + "\n";
 				if (str == null)
 				{
 					done = true;
 				}
 				else {
-					out("Echo: " + str + "\r");
+					//str = str.trim();
+					out("Echo: " + str.trim() + "\r");
 					
-					output.println(str + " " + str);
+					output.println("bite " + str);
+					//output.write(str + " " + str);
+					
 					output.write("test", 0, 4);
 					if (str.trim().equals("EXIT")) {
 						done = true;
@@ -58,10 +55,8 @@ public class Surrogate implements Runnable{
 			System.out.println(ex);
 		}
 	}
-	
 
 	private void out(String str) {
-		System.out.println(str);
+		System.out.println(str.trim());
 	}
-
 }

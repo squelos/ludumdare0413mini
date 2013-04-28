@@ -26,11 +26,13 @@ package com.ldd.uqam.minicontrapt
 			super();
 			Security.allowDomain("*");
 			Security.allowInsecureDomain("*");
-			_socket = new XMLSocket(client.getIp(), client.getPort());
+			_socket = new XMLSocket();
 			_socket.addEventListener(Event.CONNECT, onConnect);
 			_socket.addEventListener(DataEvent.DATA, onData);
 			_socket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 			_socket.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			_socket.connect(client.getIp(), client.getPort());
+			//_socket = new XMLSocket(client.getIp(), client.getPort());
 		}
 		
 		/**
@@ -41,8 +43,6 @@ package com.ldd.uqam.minicontrapt
 		public function SendMessage(message:String):void
 		{
 			_socket.send(message);
-			
-			//_socket.writeUTFBytes(message);
 			trace("sent : " + message);
 		}
 		
@@ -101,7 +101,7 @@ package com.ldd.uqam.minicontrapt
 		private function onConnect(e:Event):void
 		{
 			_opened = true;
-			//SendMessage("Connexion Ouverte et event leve");
+			SendMessage("Connexion Ouverte et event leve");
 			trace("Client Socket Connected");
 		}
 		
